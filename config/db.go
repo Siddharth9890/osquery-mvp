@@ -20,8 +20,6 @@ func NewDatabaseConnection(dsn string) (*sql.DB, error) {
 		return nil, fmt.Errorf("failed to ping database: %w", err)
 	}
 
-	conn.SetMaxOpenConns(10)
-	conn.SetMaxIdleConns(5)
 	conn.SetConnMaxLifetime(time.Hour)
 
 	return conn, nil
