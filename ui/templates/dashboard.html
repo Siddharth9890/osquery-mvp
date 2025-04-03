@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osquery Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .system-info {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            color: #3498db;
+            font-size: 16px;
+        }
+
+        .info-card p {
+            margin-bottom: 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: #7f8c8d;
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        .refresh-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            float: right;
+        }
+
+        .refresh-btn:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .system-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Osquery System Dashboard</h1>
+        <p>Real-time system information collected via osquery</p>
+    </header>
+
+    <section class="system-info">
+        <div class="info-card">
+            <h3>OS Name</h3>
+            <p>{{.SystemInfo.OSName}}</p>
+        </div>
+        <div class="info-card">
+            <h3>OS Version</h3>
+            <p>{{.SystemInfo.OSVersion}}</p>
+        </div>
+        <div class="info-card">
+            <h3>OS Platform</h3>
+            <p>{{.SystemInfo.OSPlatform}}</p>
+        </div>
+        <div class="info-card">
+            <h3>Osquery Version</h3>
+            <p>{{.SystemInfo.OsqueryVersion}}</p>
+        </div>
+    </section>
+
+    <h2>
+        Installed Applications
+    </h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .InstalledApps}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>{{.Version}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+    <div class="last-updated">
+        Last updated: {{.LastUpdated}}
+    </div>
+
+  
+</body>
+
+</html>

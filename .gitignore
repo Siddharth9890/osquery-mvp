@@ -1,0 +1,17 @@
+.env
+
+osquery-mvp
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+
+.idea/
+.vscode/
+*.swp
+*.swo
+
+vendor/
+bin/
